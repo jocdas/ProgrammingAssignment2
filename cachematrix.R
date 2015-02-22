@@ -8,13 +8,13 @@
 ## inverseMatrix(iMatrix)
 
 
-
 ## This function creates an object of the matrix class, with methods
 ## get, set, setsolve, getsolve.
 
 makeCacheMatrix <- function(x = matrix()) {
   m <- NULL
-    
+  
+  #methods for this object
   set <- function(y) {
     x <<- y
     m <<- NULL
@@ -24,7 +24,8 @@ makeCacheMatrix <- function(x = matrix()) {
     m <<- solve
   }
   getsolve <- function() m
-    
+  
+  #list the methods
   list(set = set, get = get,
        setsolve = setsolve,
        getsolve = getsolve)
@@ -37,12 +38,14 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
   m <- x$getsolve()
-    
+  
+  #Check the cache
   if(!is.null(m)) {
     message("getting cached data")
     return(m)
   }
-    
+  
+  #If the cache is empty, get the matrix, solve it, cache it and return it.
   data <- x$get()    
   m <- solve(data, ...)
   x$setsolve(m)
